@@ -1,0 +1,137 @@
+{
+  "Af": {
+    "name": "Tropical Rainforest Climate",
+    "desc": "Hot and humid year-round with significant rainfall every month. No dry season. Typical of the Amazon Basin and Congo Basin.",
+    "wiki": "https://en.wikipedia.org/wiki/Tropical_rainforest_climate"
+  },
+  "Am": {
+    "name": "Tropical Monsoon Climate",
+    "desc": "Hot year-round with a short dry season, but heavy monsoon rains compensate for it. Found in parts of India, Southeast Asia, and West Africa.",
+    "wiki": "https://en.wikipedia.org/wiki/Tropical_monsoon_climate"
+  },
+  "Aw": {
+    "name": "Tropical Savanna Climate",
+    "desc": "Hot year-round with distinct wet and dry seasons. Dry season occurs in winter. Typical of savannas in Africa, South America, and northern Australia.",
+    "wiki": "https://en.wikipedia.org/wiki/Tropical_savanna_climate"
+  },
+  "BWh": {
+    "name": "Hot Desert Climate",
+    "desc": "Extremely arid with very little rainfall and hot temperatures year-round. Found in the Sahara, Arabian, and Australian deserts.",
+    "wiki": "https://en.wikipedia.org/wiki/Desert_climate"
+  },
+  "BWk": {
+    "name": "Cold Desert Climate",
+    "desc": "Arid climate with cold winters. Found in the Gobi Desert, Great Basin, and Patagonian Desert.",
+    "wiki": "https://en.wikipedia.org/wiki/Desert_climate"
+  },
+  "BSh": {
+    "name": "Hot Semi-Arid Climate",
+    "desc": "Semi-arid steppe climate with hot temperatures. More rainfall than deserts but still dry. Found in the Sahel and parts of the Middle East.",
+    "wiki": "https://en.wikipedia.org/wiki/Semi-arid_climate"
+  },
+  "BSk": {
+    "name": "Cold Semi-Arid Climate",
+    "desc": "Semi-arid steppe climate with cold winters. Found in the Great Plains, Central Asia, and inland areas of western North America.",
+    "wiki": "https://en.wikipedia.org/wiki/Semi-arid_climate"
+  },
+  "Csa": {
+    "name": "Hot-Summer Mediterranean Climate",
+    "desc": "Warm to hot, dry summers and mild, wet winters. Classic Mediterranean climate found around the Mediterranean Sea, California, and parts of Chile and Australia.",
+    "wiki": "https://en.wikipedia.org/wiki/Mediterranean_climate"
+  },
+  "Csb": {
+    "name": "Warm-Summer Mediterranean Climate",
+    "desc": "Warm, dry summers and cool, wet winters. Found in coastal California, coastal Chile, and parts of southern Australia.",
+    "wiki": "https://en.wikipedia.org/wiki/Mediterranean_climate"
+  },
+  "Csc": {
+    "name": "Cold-Summer Mediterranean Climate",
+    "desc": "Cool, dry summers and cold, wet winters. Rare climate found in high-elevation areas with Mediterranean precipitation patterns.",
+    "wiki": "https://en.wikipedia.org/wiki/Mediterranean_climate"
+  },
+  "Cfa": {
+    "name": "Humid Subtropical Climate",
+    "desc": "Hot, humid summers and mild winters with rainfall year-round. Found in the southeastern United States, eastern China, and parts of South America.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_subtropical_climate"
+  },
+  "Cfb": {
+    "name": "Oceanic Climate",
+    "desc": "Mild temperatures year-round with regular rainfall in all seasons. Found in Western Europe, New Zealand, and the Pacific Northwest.",
+    "wiki": "https://en.wikipedia.org/wiki/Oceanic_climate"
+  },
+  "Cfc": {
+    "name": "Subpolar Oceanic Climate",
+    "desc": "Cool summers and cold winters with year-round precipitation. Found in Iceland, southern Alaska, and southern Chile.",
+    "wiki": "https://en.wikipedia.org/wiki/Oceanic_climate"
+  },
+  "Cwa": {
+    "name": "Monsoon-Influenced Humid Subtropical Climate",
+    "desc": "Hot summers with dry winters. Found in parts of northern India, southern China, and the African highlands.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_subtropical_climate"
+  },
+  "Cwb": {
+    "name": "Subtropical Highland Climate",
+    "desc": "Warm summers and mild winters with a dry winter season. Found in high-elevation tropical and subtropical areas like the East African highlands.",
+    "wiki": "https://en.wikipedia.org/wiki/Subtropical_highland_climate"
+  },
+  "Cwc": {
+    "name": "Cold Subtropical Highland Climate",
+    "desc": "Cool summers and cold winters with dry winters. Found in very high elevation tropical areas.",
+    "wiki": "https://en.wikipedia.org/wiki/Subtropical_highland_climate"
+  },
+  "Dfa": {
+    "name": "Hot-Summer Humid Continental Climate",
+    "desc": "Hot summers and cold winters with precipitation year-round. Found in the northern United States and southern Canada.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_continental_climate"
+  },
+  "Dfb": {
+    "name": "Warm-Summer Humid Continental Climate",
+    "desc": "Warm summers and very cold winters with year-round precipitation. Found in northern United States, central Canada, and northern Europe.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_continental_climate"
+  },
+  "Dfc": {
+    "name": "Subarctic Climate",
+    "desc": "Short, cool summers and long, very cold winters with year-round precipitation. Found in Siberia, northern Canada, and Alaska.",
+    "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
+  },
+  "Dwa": {
+    "name": "Monsoon-Influenced Hot-Summer Continental Climate",
+    "desc": "Hot summers and cold, dry winters. Found in northern China and Korea.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_continental_climate"
+  },
+  "Dwb": {
+    "name": "Monsoon-Influenced Warm-Summer Continental Climate",
+    "desc": "Warm summers and very cold, dry winters. Found in parts of northeastern China and Mongolia.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_continental_climate"
+  },
+  "Dwc": {
+    "name": "Monsoon-Influenced Subarctic Climate",
+    "desc": "Cool summers and extremely cold, dry winters. Found in eastern Siberia.",
+    "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
+  },
+  "Dsa": {
+    "name": "Mediterranean-Influenced Hot-Summer Continental Climate",
+    "desc": "Hot, dry summers and cold winters. Rare climate found in parts of Turkey and Iran.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_continental_climate"
+  },
+  "Dsb": {
+    "name": "Mediterranean-Influenced Warm-Summer Continental Climate",
+    "desc": "Warm, dry summers and cold winters. Found in parts of interior western United States and central Asia.",
+    "wiki": "https://en.wikipedia.org/wiki/Humid_continental_climate"
+  },
+  "Dsc": {
+    "name": "Mediterranean-Influenced Subarctic Climate",
+    "desc": "Cool, dry summers and very cold winters. Rare climate found in small areas of interior Alaska and Asia.",
+    "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
+  },
+  "ET": {
+    "name": "Tundra Climate",
+    "desc": "At least one month above freezing but no month above 10°C. Found in northern Canada, Alaska, northern Russia, and Antarctica coasts.",
+    "wiki": "https://en.wikipedia.org/wiki/Tundra_climate"
+  },
+  "EF": {
+    "name": "Ice Cap Climate",
+    "desc": "All months below freezing with permanent ice cover. Found in Antarctica, Greenland interior, and high Arctic islands.",
+    "wiki": "https://en.wikipedia.org/wiki/Ice_cap_climate"
+  }
+}
