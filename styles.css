@@ -218,4 +218,23 @@
                 border-bottom: 1px solid #dee2e6;
             }
         }
+       
+              .donate-floating {
+         position: fixed;
+         bottom: 16px;
+         right: 16px;
+         z-index: 9999;
+         max-width: 90vw;
+       }
+       
+       @media (max-width: 600px) {
+         .donate-floating {
+           bottom: 64px;
+           right: 12px;
+           transform: scale(0.9);
+           transform-origin: bottom right;
+         }
+       }
+
+
     </style>
