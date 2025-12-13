@@ -392,7 +392,7 @@
                         },
                         subtitle: {
                             display: true,
-                            text: 'Created by scansot064 AT g.educaand.es with claude.ai, Geonames, Worldclim - CC BY 4.0',
+                            text: 'Created by scansot064 AT g.educaand.es with claude.ai - CC BY 4.0',
                             font: {
                                 size: 10,
                                 style: 'italic'
