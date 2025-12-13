@@ -10,8 +10,13 @@
     "wiki": "https://en.wikipedia.org/wiki/Tropical_monsoon_climate"
   },
   "Aw": {
-    "name": "Tropical Savanna Climate",
-    "desc": "Hot year-round with distinct wet and dry seasons. Dry season occurs in winter. Typical of savannas in Africa, South America, and northern Australia.",
+    "name": "Tropical Savanna Climate (Dry Winter)",
+    "desc": "Hot year-round with distinct wet and dry seasons. Dry season occurs in winter (low-sun period). Typical of savannas in Africa, South America, and northern Australia.",
+    "wiki": "https://en.wikipedia.org/wiki/Tropical_savanna_climate"
+  },
+  "As": {
+    "name": "Tropical Savanna Climate (Dry Summer)",
+    "desc": "Hot year-round with distinct wet and dry seasons. Dry season occurs in summer (high-sun period). A rare climate found in parts of northeastern Brazil, Hawaii, and coastal East Africa.",
     "wiki": "https://en.wikipedia.org/wiki/Tropical_savanna_climate"
   },
   "BWh": {
@@ -122,6 +127,21 @@
   "Dsc": {
     "name": "Mediterranean-Influenced Subarctic Climate",
     "desc": "Cool, dry summers and very cold winters. Rare climate found in small areas of interior Alaska and Asia.",
+    "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
+  },
+  "Dfd": {
+    "name": "Extremely Cold Subarctic Climate",
+    "desc": "Short, cool summers and extremely cold winters (coldest month below -38°C). Found in the coldest inhabited places on Earth like Verkhoyansk and Oymyakon in Siberia.",
+    "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
+  },
+  "Dwd": {
+    "name": "Extremely Cold Subarctic Climate (Dry Winter)",
+    "desc": "Short summers and extremely cold, dry winters (coldest month below -38°C). Found in eastern Siberia with monsoon influence.",
+    "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
+  },
+  "Dsd": {
+    "name": "Extremely Cold Subarctic Climate (Dry Summer)",
+    "desc": "Short summers and extremely cold winters (coldest month below -38°C) with dry summers. Extremely rare, theoretical climate type.",
     "wiki": "https://en.wikipedia.org/wiki/Subarctic_climate"
   },
   "ET": {

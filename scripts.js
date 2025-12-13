@@ -5,6 +5,8 @@ let climateData = [];
 let chart = null;
 let currentTemperatures = null;
 let currentPrecipitation = null;
+let currentLatitude = null;  // Store latitude for auto hemisphere detection
+let isManualInput = false;   // Flag to track if using manual input
 let koppenData = {};
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -431,6 +433,10 @@ function loadCity() {
     document.getElementById('infoCoords').textContent = `${cityData.lat}°, ${cityData.lon}°`;
     document.getElementById('locationInfo').style.display = 'block';
 
+    // Store latitude for hemisphere auto-detection and mark as database input
+    currentLatitude = parseFloat(cityData.lat);
+    isManualInput = false;
+
     // Generate diagram
     generateDiagram(temperatures, precipitation, cityData.city, countryNames[cityData.country] || cityData.country);
 }
@@ -689,6 +695,10 @@ function generateManualDiagram() {
         // Hide location info from selector
         document.getElementById('locationInfo').style.display = 'none';
 
+        // Mark as manual input (no coordinates available)
+        isManualInput = true;
+        currentLatitude = null;
+
         // Generate diagram
         generateDiagram(temperatures, precipitation, city, country);
 
@@ -738,9 +748,6 @@ function classifyClimate() {
 }
 
 function determineKoppenCode(temps, precip) {
-    // Reset questions
-    document.getElementById('koppenQuestion').style.display = 'none';
-
     // Check for B (Arid) Climates
     const annualPrecip = precip.reduce((a, b) => a + b, 0);
     const annualMeanTemp = temps.reduce((a, b) => a + b, 0) / 12;
@@ -757,15 +764,21 @@ function determineKoppenCode(temps, precip) {
     // Check for A (Tropical) Climate
     const minTemp = Math.min(...temps);
     if (minTemp >= 18) {
-        document.getElementById('koppenQuestion').style.display = 'block';
-        const hemisphere = document.querySelector('input[name="hemisphere"]:checked')?.value;
+        let isNorthern;
 
-        if (!hemisphere) {
-            alert('Please select a hemisphere option for tropical climate classification.');
-            return null;
+        if (isManualInput) {
+            // For manual input, use the hemisphere selector
+            const hemisphere = document.querySelector('input[name="manualHemisphere"]:checked')?.value;
+            if (!hemisphere) {
+                alert('Please select a hemisphere option in the manual input section.');
+                return null;
+            }
+            isNorthern = hemisphere === 'north';
+        } else {
+            // For database cities, auto-detect from latitude
+            isNorthern = currentLatitude >= 0;
         }
 
-        const isNorthern = hemisphere === 'north';
         const subcat = determineASubcategory(precip, isNorthern);
         return "A" + subcat;
     }
@@ -787,12 +800,23 @@ function determineKoppenCode(temps, precip) {
 
 function determineASubcategory(precip, isNorthern) {
     const dryMonths = precip.filter(p => p < 60).length;
+    const driestMonthPrecip = Math.min(...precip);
+    const annualPrecip = precip.reduce((a, b) => a + b, 0);
 
+    // Af: No dry season - every month >= 60mm
     if (dryMonths === 0) {
         return "f";
     }
 
-    // Find driest 3-month period
+    // Am: Monsoon - despite dry month(s), enough annual rain to offset
+    // Driest month >= 100 - (annual precipitation / 25)
+    const amThreshold = 100 - (annualPrecip / 25);
+    if (driestMonthPrecip >= amThreshold) {
+        return "m";
+    }
+
+    // For Aw vs As, we need to determine when the dry season occurs
+    // Find the driest 3-month period
     let minPrecip3Month = Infinity;
     let driestStart = 0;
 
@@ -804,16 +828,24 @@ function determineASubcategory(precip, isNorthern) {
         }
     }
 
+    // Define summer and winter months based on hemisphere
+    // Northern: Summer = Jun(5), Jul(6), Aug(7); Winter = Dec(11), Jan(0), Feb(1)
+    // Southern: Summer = Dec(11), Jan(0), Feb(1); Winter = Jun(5), Jul(6), Jul(7)
+    const summerMonths = isNorthern ? [5, 6, 7] : [11, 0, 1];
     const winterMonths = isNorthern ? [11, 0, 1] : [5, 6, 7];
+
+    // Check if the driest period starts in summer or winter
+    const isDrySummer = summerMonths.includes(driestStart);
     const isDryWinter = winterMonths.includes(driestStart);
 
     if (isDryWinter) {
-        return "w";
-    } else if (dryMonths <= 2) {
-        return "m";
+        return "w";  // Aw - Tropical savanna with dry winter
+    } else if (isDrySummer) {
+        return "s";  // As - Tropical savanna with dry summer
     }
 
-    return "f";
+    // Fallback: dry season in transition months, typically treated as Aw
+    return "w";
 }
 
 function determineCDSubcategory(temps, precip) {
@@ -839,12 +871,21 @@ function determineCDSubcategory(temps, precip) {
 
     // Determine heat code
     const warmestTemp = Math.max(...temps);
+    const coldestTemp = Math.min(...temps);
     let heatCode;
+
     if (warmestTemp >= 22) {
         heatCode = "a";
     } else {
         const warmMonths = temps.filter(t => t >= 10).length;
-        heatCode = warmMonths >= 4 ? "b" : "c";
+        if (warmMonths >= 4) {
+            heatCode = "b";
+        } else if (coldestTemp < -38) {
+            // Extremely cold continental - only for D climates
+            heatCode = "d";
+        } else {
+            heatCode = "c";
+        }
     }
 
     return seasonCode + heatCode;
