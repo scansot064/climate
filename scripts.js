@@ -828,24 +828,29 @@ function determineASubcategory(precip, isNorthern) {
         }
     }
 
-    // Define summer and winter months based on hemisphere
-    // Northern: Summer = Jun(5), Jul(6), Aug(7); Winter = Dec(11), Jan(0), Feb(1)
-    // Southern: Summer = Dec(11), Jan(0), Feb(1); Winter = Jun(5), Jul(6), Jul(7)
-    const summerMonths = isNorthern ? [5, 6, 7] : [11, 0, 1];
-    const winterMonths = isNorthern ? [11, 0, 1] : [5, 6, 7];
+    // Get the 3 driest consecutive months
+    const driestMonths = [
+        driestStart,
+        (driestStart + 1) % 12,
+        (driestStart + 2) % 12
+    ];
 
-    // Check if the driest period starts in summer or winter
-    const isDrySummer = summerMonths.includes(driestStart);
-    const isDryWinter = winterMonths.includes(driestStart);
+    // Define summer and winter half-years based on hemisphere
+    // Northern: Summer half = Apr-Sep (3,4,5,6,7,8); Winter half = Oct-Mar (9,10,11,0,1,2)
+    // Southern: Summer half = Oct-Mar (9,10,11,0,1,2); Winter half = Apr-Sep (3,4,5,6,7,8)
+    const summerHalf = isNorthern ? [3, 4, 5, 6, 7, 8] : [9, 10, 11, 0, 1, 2];
+    const winterHalf = isNorthern ? [9, 10, 11, 0, 1, 2] : [3, 4, 5, 6, 7, 8];
 
-    if (isDryWinter) {
-        return "w";  // Aw - Tropical savanna with dry winter
-    } else if (isDrySummer) {
+    // Count how many of the driest months fall in summer vs winter half-year
+    const dryInSummer = driestMonths.filter(m => summerHalf.includes(m)).length;
+    const dryInWinter = driestMonths.filter(m => winterHalf.includes(m)).length;
+
+    // If more dry months in summer half → As; if more in winter half → Aw
+    if (dryInSummer > dryInWinter) {
         return "s";  // As - Tropical savanna with dry summer
+    } else {
+        return "w";  // Aw - Tropical savanna with dry winter
     }
-
-    // Fallback: dry season in transition months, typically treated as Aw
-    return "w";
 }
 
 function determineCDSubcategory(temps, precip) {
