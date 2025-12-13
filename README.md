@@ -18,15 +18,13 @@ Output & Usability	Generated charts are easily exportable in PNG format for rese
 
 Future development focuses on improving user experience, data breadth, and code maintainability:
 
-Improved City Selection: Enhance the city search interface (autocomplete/datalist) for a more efficient and user-friendly data selection process.
-
 Data Refinement: Implement a solution to resolve duplicated city names, especially in large countries (e.g., the USA), potentially by adding state/region options.
 
 Station Expansion: Integrate climate stations from underrepresented regions, including additional Arctic and Antarctic locations.
 
-Code Separation: Refactor the codebase to separate CSS styling from HTML logic, improving modularity and long-term maintainability.
+Better mobile experience
 
-KEY DATA:
+DATA SOURCES
 
 City names from Cities with more than 1000 people, Geonames.
 GeoNames was founded by Marc Wick. You can reach him at marc@geonames.org
@@ -35,7 +33,9 @@ https://www.geonames.org/about.html
 
 Temperature and precipitation data processed by myself using Python and cities' geographical coordinates, from raster files at:
 Fick, S.E. and R.J. Hijmans, 2017. WorldClim 2: new 1km spatial resolution climate surfaces for global land areas. International Journal of Climatology 37 (12): 4302-4315.
+
 https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_30s_tavg.zip
+
 https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_30s_prec.zip
 
 About WorldClim License
