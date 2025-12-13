@@ -1,5 +1,4 @@
-<script>
-        // Country code lookup table - loaded from external JSON file
+ // Country code lookup table - loaded from external JSON file
         let countryNames = {};
         
         let climateData = [];
@@ -712,4 +711,3 @@
             
             return 'Climate classification complete. Code: ' + code;
         }
-    </script>
