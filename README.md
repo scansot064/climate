@@ -13,14 +13,23 @@ Köppen Classification	Integrates an internal, accurate Köppen-Geiger classific
 Tech Stack	Built on a robust foundation of vanilla JavaScript, utilizing popular libraries: Chart.js for rendering professional-grade charts and PapaParse.js for efficient, client-side handling and parsing of raw CSV climate data.
 Output & Usability	Generated charts are easily exportable in PNG format for research, educational, or professional use.
 
+
 🗺️ Current Roadmap
 
 Future development focuses on improving user experience, data breadth, and code maintainability:
 
-    Improved City Selection: Enhance the city search interface (autocomplete/datalist) for a more efficient and user-friendly data selection process.
+Improved City Selection: Enhance the city search interface (autocomplete/datalist) for a more efficient and user-friendly data selection process.
 
-    Data Refinement: Implement a solution to resolve duplicated city names, especially in large countries (e.g., the USA), potentially by adding state/region options.
+Data Refinement: Implement a solution to resolve duplicated city names, especially in large countries (e.g., the USA), potentially by adding state/region options.
 
-    Station Expansion: Integrate climate stations from underrepresented regions, including additional Arctic and Antarctic locations.
+Station Expansion: Integrate climate stations from underrepresented regions, including additional Arctic and Antarctic locations.
 
-    Code Separation: Refactor the codebase to separate CSS styling from HTML logic, improving modularity and long-term maintainability.
+Code Separation: Refactor the codebase to separate CSS styling from HTML logic, improving modularity and long-term maintainability.
+
+
+
+City names from Cities with more than 1000 people, Geonames.
+
+GeoNames was founded by Marc Wick. You can reach him at marc@geonames.org
+GeoNames is a project of Unxos GmbH, Tutilostrasse 17d, 9011 St. Gallen, Switzerland. 
+https://www.geonames.org/about.html
