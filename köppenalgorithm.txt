@@ -1,0 +1,99 @@
+ALGORITHM KoppenClassification
+
+INPUTS:
+  T[1..12]: Monthly Mean Temperatures (°C)
+  P[1..12]: Monthly Total Precipitation (mm)
+  Hemisphere: "North" or "South" (Defined by input or detected via warmest months)
+
+# 1. SETUP & DEFINITIONS
+  T_avg  = Average(T)
+  P_ann  = Sum(P)
+  T_min  = Min(T)
+  T_max  = Max(T)
+  
+  # Determine Seasons (Half-Years) for Analysis
+  If North:
+      Summer_Months = April - September
+      Winter_Months = October - March
+  Else (South):
+      Summer_Months = October - March
+      Winter_Months = April - September
+
+# 2. CHECK GROUP B (ARID CLIMATES)
+  # Simplified aridity threshold used in script
+  Threshold = T_avg * 20
+  
+  If P_ann < (Threshold * 0.5):
+      Code = "BW"  # Desert
+      Suffix = (T_avg >= 18) ? "h" : "k"
+      Return Code + Suffix
+  
+  Else If P_ann < Threshold:
+      Code = "BS"  # Steppe
+      Suffix = (T_avg >= 18) ? "h" : "k"
+      Return Code + Suffix
+
+# 3. CHECK GROUP A (TROPICAL CLIMATES)
+  If T_min >= 18°C:
+      P_min = Min(P)
+      
+      # Af (Rainforest): Sticky wet
+      If P_min >= 60mm: Return "Af"
+      
+      # Am (Monsoon): Compensates for dry season
+      Threshold_Am = 100 - (P_ann / 25)
+      If P_min >= Threshold_Am: Return "Am"
+      
+      # As/Aw (Savanna): Distinct dry season logic
+      Dry_Months = Indices of the 3 consecutive driest months
+      Summer_Dry_Count = Count(Dry_Months occurring in Summer_Months)
+      Winter_Dry_Count = Count(Dry_Months occurring in Winter_Months)
+      
+      If Summer_Dry_Count > Winter_Dry_Count:
+          Return "As"  # Dry Summer (Rare)
+      Else:
+          Return "Aw"  # Dry Winter (Common)
+
+# 4. CHECK GROUP E (POLAR CLIMATES)
+  If T_max < 10°C:
+      If T_max > 0°C: Return "ET" (Tundra)
+      Else: Return "EF" (Ice Cap)
+
+# 5. CHECK GROUP C & D (TEMPERATE & CONTINENTAL)
+  # Main Group Determination
+  If T_min >= -3°C: 
+      MainGroup = "C"
+  Else: 
+      MainGroup = "D"
+
+  # Determine 2nd Letter (Seasonality)
+  P_summer_min = Min(P in Summer_Months)
+  P_winter_max = Max(P in Winter_Months)
+  P_winter_min = Min(P in Winter_Months)
+  P_summer_max = Max(P in Summer_Months)
+
+  # Check for Dry Summer (s) - Mediterranean/Dry Summer Continental
+  If P_summer_min < 30mm AND P_summer_min < (P_winter_max / 3):
+      Season = "s" 
+      
+  # Check for Dry Winter (w) - Monsoon influenced
+  Else If P_winter_min < (P_summer_max / 10):
+      Season = "w"
+      
+  # No Dry Season (f)
+  Else:
+      Season = "f" 
+
+  # Determine 3rd Letter (Heat Code)
+  Count_Warm_Months = Count(Months where T >= 10°C)
+  
+  If T_max >= 22°C:
+      Heat = "a"  # Hot Summer
+  Else If Count_Warm_Months >= 4:
+      Heat = "b"  # Warm Summer
+  Else If T_min < -38°C:
+      Heat = "d"  # Extremely Cold (D only)
+  Else:
+      Heat = "c"  # Cold/Subpolar
+
+  Return MainGroup + Season + Heat
