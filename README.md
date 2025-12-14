@@ -1,9 +1,11 @@
-☀️ Climate Diagram Generator
+Climate Diagram Generator
 
-The Climate Diagram Generator is a sophisticated, open-source web tool designed to produce modern, highly readable climate charts (Climographs) with a strong emphasis on cartographic coherence and scientific accuracy.
+The Climate Diagram Generator is a fairly simple, open-source web tool designed to produce modern, highly readable climate charts (Climographs) with scientific accuracy.
 
 This project was initiated to address common limitations found in existing climate data visualization tools, specifically concerning poor vertical axis scaling, data crowding, and outdated user interface design.
-✨ Key Features and Technical Specifications
+
+Key Features and Technical Specifications
+
 Feature Category	Description
 Data Visualization Coherence	Generates high-quality charts using a modern UI aesthetic, prioritizing readability and scientific accuracy. Includes the ability to adjust chart height for optimal display and export.
 Gaussen Index Compliance	Critical Feature: The vertical axes for temperature and precipitation are scaled to respect Gaussen's Aridity Index (P=2T), ensuring direct visual representation of drought periods.
