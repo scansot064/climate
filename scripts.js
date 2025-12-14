@@ -854,23 +854,44 @@ function determineASubcategory(precip, isNorthern) {
 }
 
 function determineCDSubcategory(temps, precip) {
-    // Detect hemisphere
+    // Detect hemisphere based on warmest period
     const northernSummerTemp = temps[5] + temps[6] + temps[7];
     const southernSummerTemp = temps[11] + temps[0] + temps[1];
     const isNorthern = northernSummerTemp > southernSummerTemp;
 
-    const summerMonths = isNorthern ? [5, 6, 7] : [11, 0, 1];
-    const winterMonths = isNorthern ? [11, 0, 1] : [5, 6, 7];
+    // Define summer and winter months
+    // Northern: Summer = Apr-Sep (3,4,5,6,7,8); Winter = Oct-Mar (9,10,11,0,1,2)
+    // Southern: Summer = Oct-Mar (9,10,11,0,1,2); Winter = Apr-Sep (3,4,5,6,7,8)
+    const summerMonths = isNorthern ? [3, 4, 5, 6, 7, 8] : [9, 10, 11, 0, 1, 2];
+    const winterMonths = isNorthern ? [9, 10, 11, 0, 1, 2] : [3, 4, 5, 6, 7, 8];
 
-    const summerPrecip = summerMonths.reduce((sum, i) => sum + precip[i], 0);
-    const winterPrecip = winterMonths.reduce((sum, i) => sum + precip[i], 0);
+    // Get precipitation values for each season
+    const summerPrecipValues = summerMonths.map(i => precip[i]);
+    const winterPrecipValues = winterMonths.map(i => precip[i]);
+
+    // Find driest and wettest months in each season
+    const driestSummerMonth = Math.min(...summerPrecipValues);
+    const wettestSummerMonth = Math.max(...summerPrecipValues);
+    const driestWinterMonth = Math.min(...winterPrecipValues);
+    const wettestWinterMonth = Math.max(...winterPrecipValues);
+
+    // Köppen criteria for dry season determination:
+    // Cs (dry summer): Driest summer month < 30mm AND driest summer month < 1/3 wettest winter month
+    // Cw (dry winter): Driest winter month < 1/10 wettest summer month
+    // Cf (no dry season): Neither condition met
 
     let seasonCode;
-    if (summerPrecip < 40 && summerPrecip < winterPrecip / 3) {
+
+    // Check for dry summer (Mediterranean - Cs)
+    if (driestSummerMonth < 30 && driestSummerMonth < wettestWinterMonth / 3) {
         seasonCode = "s";
-    } else if (winterPrecip < 40 && winterPrecip < summerPrecip / 10) {
+    }
+    // Check for dry winter (Cw)
+    else if (driestWinterMonth < wettestSummerMonth / 10) {
         seasonCode = "w";
-    } else {
+    }
+    // No distinct dry season (Cf)
+    else {
         seasonCode = "f";
     }
 
