@@ -30,10 +30,10 @@ Generated charts are easily exportable in PNG format for research, educational, 
 
 🗺️ Current Roadmap
 
-Future development focuses on improving user experience:
-
-Data Refinement: Implement a solution to resolve duplicated city names, especially in large countries (e.g., the USA), potentially by adding state/region options.
+Future development focuses on improving user experience and visual appeal.
 
 Station Expansion: Integrate climate stations from underrepresented regions, including strange status territories and island I had to remove from the CSV files for simplicity due to lacking country codes, and additional Arctic and Antarctic locations.
 
-Better mobile experience. Adjustable width.
+Better mobile experience.
+
+Other languages than English. Providing diagrams and UI in German, Spanish, French, Italian, Japanese, Chinese, or Russian.
