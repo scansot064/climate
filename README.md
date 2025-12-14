@@ -13,7 +13,7 @@ Generates high-quality charts using a modern UI aesthetic, prioritizing readabil
 Critical Feature: The vertical axes for temperature and precipitation are scaled to respect Gaussen's Aridity Index (P=2T), ensuring direct visual representation of drought periods.
 
 ✔ Standardized Axis Scaling
-Precipitation axis consistently starts at zero (0 mm), even when negative temperatures are present, maintaining strict data integrity and consistency.
+Precipitation axis consistently starts at zero (0 mm), even when negative temperatures are present, maintaining design (unlike climate-data.org where bars start at the bottom, regardless of negative temperatures, making the charts completely unusable).
 
 ✔ Global Data Access
 Provides access to climate data for virtually every city above 1000 inhabitants worldwide, covering most countries.
