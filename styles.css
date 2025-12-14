@@ -29,7 +29,7 @@ body {
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .city-dropdown.active {
@@ -42,8 +42,10 @@ body {
     border-bottom: 1px solid #f0f0f0;
 }
 
-.city-dropdown-item:hover, .city-dropdown-item.highlighted {
-    background-color: #0d6efd; /* Bootstrap primary */
+.city-dropdown-item:hover,
+.city-dropdown-item.highlighted {
+    background-color: #0d6efd;
+    /* Bootstrap primary */
     color: white;
 }
 
@@ -58,4 +60,13 @@ body {
     bottom: 80px;
     right: 20px;
     z-index: 1050;
+}
+
+@media (max-width: 768px) {
+    .donate-floating {
+        bottom: 70px;
+        right: 10px;
+        transform: scale(0.8);
+        transform-origin: bottom right;
+    }
 }
