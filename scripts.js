@@ -441,11 +441,22 @@ function loadCity() {
     generateDiagram(temperatures, precipitation, cityData.city, countryNames[cityData.country] || cityData.country);
 }
 
+// Track current location for export
+let currentCityName = '';
+let currentCountryName = '';
+
 // Generate climate diagram
 function generateDiagram(temperatures, precipitation, city, country) {
-    // Store current data for Köppen classification
+    // Store current data for Köppen classification and Export
     currentTemperatures = temperatures;
     currentPrecipitation = precipitation;
+    currentCityName = city;
+    currentCountryName = country;
+
+    // Reset Köppen classification result
+    document.getElementById('koppenResult').style.display = 'none';
+    document.getElementById('koppenCode').textContent = '';
+    document.getElementById('koppenDesc').innerHTML = '';
 
     // Show Köppen classify button
     document.getElementById('classifyBtn').style.display = 'block';
@@ -718,9 +729,11 @@ function exportChart() {
     canvas.toBlob(function (blob) {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        const cityName = document.getElementById('infoCity').textContent;
-        const countryName = document.getElementById('infoCountry').textContent;
-        const filename = `${cityName}-${countryName}-climate.png`.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+
+        // Use global variables for filename, fallback to 'climate-diagram' if empty
+        const safeCity = (currentCityName || 'climate').toLowerCase().replace(/[^a-z0-9-]/g, '-');
+        const safeCountry = (currentCountryName || 'diagram').toLowerCase().replace(/[^a-z0-9-]/g, '-');
+        const filename = `${safeCity}-${safeCountry}.png`;
 
         link.download = filename;
         link.href = url;
