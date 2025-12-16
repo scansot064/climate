@@ -50,38 +50,29 @@ async function loadKoppenData() {
     }
 }
 
-// Load background images
-let backgroundImages = [];
-let backgroundIndex = 0;
-
-async function loadBackgrounds() {
-    try {
-        const response = await fetch('backgrounds.json');
-        if (response.ok) {
-            const data = await response.json();
-            backgroundImages = data.images;
-            setRandomBackground();
-        }
-    } catch (error) {
-        console.error('Error loading backgrounds:', error);
-    }
-}
-
-// Set random background
+// Set random local background
 function setRandomBackground() {
-    if (backgroundImages.length > 0) {
-        const id = backgroundImages[backgroundIndex];
-        // Use source.unsplash to accept both slugs and numeric-style ids. Add timestamp to avoid caching.
-        const imageUrl = `https://source.unsplash.com/${id}/1920x1080?${Date.now()}`;
-        document.getElementById('parallax-bg').style.backgroundImage = `url('${imageUrl}')`;
-        backgroundIndex = (backgroundIndex + 1) % backgroundImages.length;
+    // Array of local filenames as requested
+    const images = ['back1.jpg', 'back2.jpg', 'back3.jpg', 'back4.jpg', 'back5.jpg'];
+
+    // Pick random index
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const randomImage = images[randomIndex];
+
+    // Apply background
+    const bgElement = document.getElementById('parallax-bg');
+    if (bgElement) {
+        bgElement.style.backgroundImage = `url('${randomImage}')`;
+        console.log('Background set to:', randomImage);
+    } else {
+        console.error('Parallax background element not found');
     }
 }
 
 // Load data on page load
 loadCountryCodes();
 loadKoppenData();
-loadBackgrounds();
+setRandomBackground();
 
 // Update chart height
 function updateChartHeight(height) {
@@ -470,14 +461,14 @@ function loadCity() {
     document.getElementById('infoCity').textContent = cityData.city;
     document.getElementById('infoCountry').textContent = countryNames[cityData.country] || cityData.country;
     document.getElementById('infoCoords').textContent = `${cityData.lat}°, ${cityData.lon}°`;
-    
+
     // Calculate mean temperature and total precipitation
     const meanTemp = temperatures.reduce((a, b) => a + b, 0) / temperatures.length;
     const totalPrecip = precipitation.reduce((a, b) => a + b, 0);
-    
+
     document.getElementById('infoMeanTemp').textContent = meanTemp.toFixed(1) + ' °C';
     document.getElementById('infoTotalPrecip').textContent = totalPrecip.toFixed(0) + ' mm';
-    
+
     document.getElementById('locationInfo').style.display = 'block';
 
     // Hide manual location info
@@ -756,14 +747,14 @@ function generateManualDiagram() {
         // Update info display for manual input
         document.getElementById('manualInfoCity').textContent = city;
         document.getElementById('manualInfoCountry').textContent = country;
-        
+
         // Calculate mean temperature and total precipitation
         const meanTemp = temperatures.reduce((a, b) => a + b, 0) / temperatures.length;
         const totalPrecip = precipitation.reduce((a, b) => a + b, 0);
-        
+
         document.getElementById('manualInfoMeanTemp').textContent = meanTemp.toFixed(1) + ' °C';
         document.getElementById('manualInfoTotalPrecip').textContent = totalPrecip.toFixed(0) + ' mm';
-        
+
         document.getElementById('manualLocationInfo').style.display = 'block';
 
         // Mark as manual input (no coordinates available)
