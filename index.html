@@ -9,6 +9,9 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -18,6 +21,9 @@
 </head>
 
 <body>
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+
     <!-- Floating Donate Button -->
     <div class="donate-floating">
         <script src="https://liberapay.com/scansot064/widgets/button.js"></script>
@@ -32,7 +38,7 @@
         <div class="card shadow-lg border-0 overflow-hidden">
             <!-- Header -->
             <div class="card-header bg-gradient-primary text-white text-center py-5 border-0">
-                <h1 class="display-5 fw-bold mb-2">🌡️ Climate Diagram Generator</h1>
+                <h1 class="display-5 fw-bold mb-2">Climate Diagram Generator</h1>
                 <p class="lead mb-0 opacity-75">Select a city from 150,000+ locations worldwide</p>
             </div>
 
@@ -46,7 +52,7 @@
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <strong class="text-primary">📍 Select Location</strong>
+                                    <strong class="text-primary">Select Location</strong>
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
@@ -93,7 +99,9 @@
                                         style="display:none;">
                                         <p class="mb-1"><strong>Location:</strong> <span id="infoCity"></span></p>
                                         <p class="mb-1"><strong>Country:</strong> <span id="infoCountry"></span></p>
-                                        <p class="mb-0"><strong>Coordinates:</strong> <span id="infoCoords"></span></p>
+                                        <p class="mb-1"><strong>Coordinates:</strong> <span id="infoCoords"></span></p>
+                                        <p class="mb-1"><strong>Mean Yearly Temperature:</strong> <span id="infoMeanTemp"></span></p>
+                                        <p class="mb-0"><strong>Total Yearly Precipitation:</strong> <span id="infoTotalPrecip"></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +112,7 @@
                             <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <strong class="text-primary">✏️ Input Your Own Data</strong>
+                                    <strong class="text-primary">Input Your Own Data</strong>
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -158,13 +166,22 @@
                                         class="btn btn-info text-white fw-bold w-100">
                                         Generate Custom Diagram
                                     </button>
+
+                                    <div id="manualLocationInfo"
+                                        class="alert alert-primary border-start border-4 border-primary mt-3"
+                                        style="display:none;">
+                                        <p class="mb-1"><strong>Location:</strong> <span id="manualInfoCity"></span></p>
+                                        <p class="mb-1"><strong>Country:</strong> <span id="manualInfoCountry"></span></p>
+                                        <p class="mb-1"><strong>Mean Yearly Temperature:</strong> <span id="manualInfoMeanTemp"></span></p>
+                                        <p class="mb-0"><strong>Total Yearly Precipitation:</strong> <span id="manualInfoTotalPrecip"></span></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-4">
-                        <h5 class="text-primary border-bottom border-primary border-3 pb-2 mb-3">🌍 Köppen
+                        <h5 class="text-primary border-bottom border-primary border-3 pb-2 mb-3">Köppen
                             Classification</h5>
                         <p class="text-muted small">Automatically classify the climate based on diagram data</p>
 
