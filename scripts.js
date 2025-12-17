@@ -597,7 +597,7 @@ function generateDiagram(temperatures, precipitation, city, country) {
                 },
                 subtitle: {
                     display: true,
-                    text: 'Created by scansot064 AT g.educaand.es - claude.ai - Geonames - WorldClim - CC BY 4.0',
+                    text: 'Created at climate-data.eu - Sources: WorldClim and Geonames - CC BY 4.0',
                     font: {
                         size: 10,
                         style: 'italic'
@@ -990,3 +990,4 @@ function getKoppenDescription(code) {
 
     return 'Climate classification complete. Code: ' + code;
 }
+
