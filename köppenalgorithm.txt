@@ -3,7 +3,8 @@ ALGORITHM KoppenClassification
 INPUTS:
   T[1..12]: Monthly Mean Temperatures (°C)
   P[1..12]: Monthly Total Precipitation (mm)
-  Hemisphere: "North" or "South" (Defined by input or detected via warmest months)
+  Latitude (Optional): Geographic latitude if available from database
+  User_Hemisphere (Optional): "North", "South", or "Not Sure" (Manual input)
 
 # 1. SETUP & DEFINITIONS
   T_avg  = Average(T)
@@ -11,8 +12,31 @@ INPUTS:
   T_min  = Min(T)
   T_max  = Max(T)
   
+  # Determine Hemisphere Strategy
+  Function Determine_Hemisphere(Latitude, User_Hemisphere, T):
+    
+    1. Check Latitude (Database Source)
+       If Latitude is Valid:
+           Return (Latitude >= 0) ? "North" : "South"
+           
+    2. Check User Input (Manual Source)
+       If User_Hemisphere == "North": Return "North"
+       If User_Hemisphere == "South": Return "South"
+       
+    3. Auto-Detection Fallback ("Not Sure" or unknown)
+       # Warning provided to user: Accuracy may suffer in tropical highlands
+       Summer_Temp_N = Sum(T_Jun, T_Jul, T_Aug)
+       Summer_Temp_S = Sum(T_Dec, T_Jan, T_Feb)
+       
+       If Summer_Temp_N > Summer_Temp_S:
+           Return "North"
+       Else:
+           Return "South"
+
+  Hemisphere = Determine_Hemisphere(Latitude, User_Hemisphere, T)
+
   # Determine Seasons (Half-Years) for Analysis
-  If North:
+  If Hemisphere == "North":
       Summer_Months = April - September
       Winter_Months = October - March
   Else (South):

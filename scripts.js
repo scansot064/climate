@@ -807,8 +807,39 @@ function classifyClimate() {
     if (code) {
         document.getElementById('koppenCode').textContent = code;
         document.getElementById('koppenDesc').innerHTML = getKoppenDescription(code);
+        // Add warning if manual input and not sure
+        if (isManualInput) {
+            const hemisphere = document.querySelector('input[name="manualHemisphere"]:checked')?.value;
+            if (hemisphere === 'notsure') {
+                document.getElementById('koppenDesc').innerHTML += '<br><br><div class="alert alert-warning text-dark p-2 mt-2" style="font-size: 0.9rem;">⚠️ <strong>Warning:</strong> Hemisphere was auto-detected based on temperature. Classification may be inaccurate for tropical highlands or regions where the rainy season significantly cools the summer (e.g., Addis Ababa).</div>';
+            }
+        }
+
         document.getElementById('koppenResult').style.display = 'block';
     }
+}
+
+function determineHemisphere(temps) {
+    // 1. If database city (and valid latitude), use latitude
+    if (!isManualInput && currentLatitude !== null) {
+        return currentLatitude >= 0;
+    }
+
+    // 2. Check for manual input override
+    if (isManualInput) {
+        const hemisphere = document.querySelector('input[name="manualHemisphere"]:checked')?.value;
+        if (hemisphere === 'north') return true;
+        if (hemisphere === 'south') return false;
+        // if 'notsure', fall through to auto-detection
+    }
+
+    // 3. Auto-detection based on temperature (Northern Summer vs Southern Summer)
+    // Northern Summer: Jun-Aug (indices 5,6,7)
+    // Southern Summer: Dec-Feb (indices 11,0,1)
+    const northernSummerTemp = temps[5] + temps[6] + temps[7];
+    const southernSummerTemp = temps[11] + temps[0] + temps[1];
+
+    return northernSummerTemp > southernSummerTemp;
 }
 
 function determineKoppenCode(temps, precip) {
@@ -828,20 +859,7 @@ function determineKoppenCode(temps, precip) {
     // Check for A (Tropical) Climate
     const minTemp = Math.min(...temps);
     if (minTemp >= 18) {
-        let isNorthern;
-
-        if (isManualInput) {
-            // For manual input, use the hemisphere selector
-            const hemisphere = document.querySelector('input[name="manualHemisphere"]:checked')?.value;
-            if (!hemisphere) {
-                alert('Please select a hemisphere option in the manual input section.');
-                return null;
-            }
-            isNorthern = hemisphere === 'north';
-        } else {
-            // For database cities, auto-detect from latitude
-            isNorthern = currentLatitude >= 0;
-        }
+        const isNorthern = determineHemisphere(temps);
 
         const subcat = determineASubcategory(precip, isNorthern);
         return "A" + subcat;
@@ -918,10 +936,8 @@ function determineASubcategory(precip, isNorthern) {
 }
 
 function determineCDSubcategory(temps, precip) {
-    // Detect hemisphere based on warmest period
-    const northernSummerTemp = temps[5] + temps[6] + temps[7];
-    const southernSummerTemp = temps[11] + temps[0] + temps[1];
-    const isNorthern = northernSummerTemp > southernSummerTemp;
+    // Detect hemisphere
+    const isNorthern = determineHemisphere(temps);
 
     // Define summer and winter months
     // Northern: Summer = Apr-Sep (3,4,5,6,7,8); Winter = Oct-Mar (9,10,11,0,1,2)
